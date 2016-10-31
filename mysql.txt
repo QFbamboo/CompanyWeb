@@ -1,0 +1,29 @@
+create table T_ProductCategories(
+   Id INT NOT NULL AUTO_INCREMENT,
+   Name VARCHAR(250) NOT NULL,
+   PRIMARY KEY ( Id )
+);
+
+create table T_Product(
+   Id INT NOT NULL AUTO_INCREMENT,
+   Name VARCHAR(250) ,
+   ImagePath varchar(250),
+   Msg varchar(250), 
+   CategoriyId int not null,
+   PRIMARY KEY ( Id )
+);
+
+drop table T_Classes
+show tables
+
+select * from T_Product
+select * from T_ProductCategories 
+
+insert into T_Product(Name,CategoriyId,ImagePath,Msg) values('','2','/uploadfile/20160','');
+
+delete from T_Product where Id=4
+
+select * from T_Product order by Id limit 3,2   //查询第三行之后的两行，即第四行与第五行
+
+select p.Id as Id,p.Name as Name,c.Name as CategoryName from T_Product p 
+left join T_ProductCategories c on p.CategoriyId=c.Id order by Id limit 0,6

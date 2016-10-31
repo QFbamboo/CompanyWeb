@@ -1,0 +1,26 @@
+﻿#parse("Admin/Head.html")
+<p><a href="ProductEdit.ashx?action=AddNew">新增产品</a></p>
+<table>
+    <thead>
+        <tr>
+            <td>编辑</td>
+            <td>删除</td>
+            <td>名称</td>
+            <td>类别</td>
+        </tr>
+    </thead>
+    <tbody>
+        #foreach($p in $Data.Products)
+            <tr>
+                <td><a href="ProductEdit.ashx?action=Edit&Id=$p.Id">编辑</a></td>
+                <td><a href="ProductEdit.ashx?action=Delete&Id=$p.Id">删除</a></td>
+                <td><a href="">$p.Name</a></td>
+                <td><a href="">$p.CategoryName</a></td>
+            </tr>
+        #end
+    </tbody>
+</table>
+#foreach($page in $Data.PageData)
+    <a href="$page.Href">$page.Title</a>
+#end
+#parse("Admin/Foot.html")

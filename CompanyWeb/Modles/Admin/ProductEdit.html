@@ -1,0 +1,35 @@
+﻿#parse("Admin/Head.html")
+<script type="text/ecmascript" src="../scripts/ckeditor/ckeditor.js"></script>
+<!--文件上传必须得用post请求，且必须设置 enctype="multipart/form-data"-->
+<form method="post" action="ProductEdit.ashx" enctype="multipart/form-data">
+    <input type="hidden" name="IsPostBack" value="true" />
+    <input type="hidden" name="Action" value="$Data.Action" />
+    <input type="hidden" name="Id" value="$Data.Product.Id" />
+    <p>名称<input type="text" name="Name" value="$Data.Product.Name" /></p>
+    <p>
+        分类<select name="CategoryId">
+            #foreach($c in $Data.Categories)
+        #if($c.Id==$Data.Product.Id)
+            <option value="$c.Id" selected="selected">$c.Name</option>
+            #else
+            <option value="$c.Id">$c.Name</option>
+            #end
+        #end
+        </select>
+    </p>
+    <p>
+        产品图片：<input type="file" name="ProductImage" />
+        #if($Data.Action=="Edit")
+        <img src="$Data.Product.ImagePath" width="50" height="50" />
+        #end
+    </p>
+    <p>产品描述：<textarea id="Msg" name="Msg">$Data.Product.Msg</textarea></p>
+    <script type="text/ecmascript">
+        var msg = document.getElementById("Msg");
+        CKEDITOR.replace(msg);
+    </script>
+    <p>
+        <input type="submit" value="保存" />
+    </p>
+</form>
+#parse("Admin/Foot.html")
