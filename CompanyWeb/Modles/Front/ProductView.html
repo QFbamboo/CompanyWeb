@@ -1,11 +1,56 @@
 ﻿#parse("Front/Head.html")
-<center> <h1>产品名称</h1></center>
-<p><img src=""/></p>
-产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明
-产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明
-产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明
-产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明
-产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明
-说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品
-说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品说明产品
+ <script type="text/javascript" src="scripts/ajax.js"></script>
+<script type="text/javascript">
+    function postComment() {
+        var title = document.getElementById("CommentTitle").value;
+        var msg = document.getElementById("CommentMsg").value;
+        if (title.length <= 0) {
+            alert("请输入评论标题");
+            return;
+        }
+
+        if (msg.length <= 0) {
+            alert("请输入评论内容");
+            return;
+        }
+        ajax("ProductCommentAjax.ashx?Action=PostComment&ProductId=$Data.Product.Id"
+            + "&Title=" + title + "&Msg=" + msg, function (text) {
+                if (text == 'OK') {
+                    document.getElementById("CommentTitle").value = '';
+                    document.getElementById("CommentMsg").value = '';
+                }
+                LoadComments();
+            });
+    }
+    function LoadComments() {
+        ajax("ProductCommentAjax.ashx?Action=Load&ProductId=$Data.Product.Id", function (text) {
+            var comments = JSON.parse(text);
+            var ulComments = document.getElementById("ulComments");
+           ulComments.innerHTML = "";//先清除上次加载的内容
+            for (var i = 0; i < comments.length; i++) {
+                var comment = comments[i];
+                var li = document.createElement("li");
+                li.innerHTML = comment.CreateDateTime + "|" + comment.Title + "|" + comment.Msg;
+                ulComments.appendChild(li);
+            }
+            //alert(text)
+        });
+    }
+</script>
+<center> <h1>$Data.Product.Name</h1></center>
+<p>
+    <img src="$Data.Product.ImagePath" height="200" width="200" />
+</p>
+$Data.Product.Msg
+<p>
+    <ul id="ulComments"></ul>
+    <script type="text/javascript">
+        LoadComments();
+    </script>
+    <p>标题：<input type="text" id="CommentTitle" /></p>
+    <p>内容：<textarea rows="5" cols="30" id="CommentMsg"></textarea></p>
+    <p>
+        <input type="submit" value="发表评论" onclick="postComment()" />
+    </p>
+</p>
 #parse("Front/Foot.html")

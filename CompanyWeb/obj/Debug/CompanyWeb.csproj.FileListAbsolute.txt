@@ -4,4 +4,3 @@ D:\Code\Asp\CompanyWeb\CompanyWeb\bin\MySql.Data.dll
 D:\Code\Asp\CompanyWeb\CompanyWeb\bin\NVelocity.dll
 D:\Code\Asp\CompanyWeb\CompanyWeb\obj\Debug\CompanyWeb.dll
 D:\Code\Asp\CompanyWeb\CompanyWeb\obj\Debug\CompanyWeb.pdb
-D:\Code\Asp\CompanyWeb\CompanyWeb\obj\Debug\CompanyWeb.csprojResolveAssemblyReference.cache

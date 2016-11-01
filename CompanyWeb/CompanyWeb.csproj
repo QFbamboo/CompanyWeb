@@ -110,6 +110,7 @@
     <Content Include="news.html" />
     <Content Include="NVelocity.dll" />
     <Content Include="products.html" />
+    <Content Include="scripts\ajax.js" />
     <Content Include="scripts\ckeditor\adapters\jquery.js" />
     <Content Include="scripts\ckeditor\ckeditor.js" />
     <Content Include="scripts\ckeditor\ckeditor_basic.js" />
@@ -368,6 +369,9 @@
     <Compile Include="index.ashx.cs">
       <DependentUpon>index.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ProductCommentAjax.ashx.cs">
+      <DependentUpon>ProductCommentAjax.ashx</DependentUpon>
+    </Compile>
     <Compile Include="ProductList.ashx.cs">
       <DependentUpon>ProductList.ashx</DependentUpon>
     </Compile>
@@ -385,6 +389,7 @@
     <Content Include="Admin\ProductList.ashx" />
     <Content Include="Admin\ProductEdit.ashx" />
     <Content Include="scripts\ckeditor\.htaccess" />
+    <Content Include="ProductCommentAjax.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

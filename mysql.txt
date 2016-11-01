@@ -27,3 +27,17 @@ select * from T_Product order by Id limit 3,2   //查询第三行之后的两行，即第四行
 
 select p.Id as Id,p.Name as Name,c.Name as CategoryName from T_Product p 
 left join T_ProductCategories c on p.CategoriyId=c.Id order by Id limit 0,6
+
+create table T_ProductComments(
+   Id INT NOT NULL AUTO_INCREMENT,
+   ProductId INT  NOT NULL  ,
+   Title varchar(250) NOT NULL,
+   Msg varchar(250) NOT NULL, 
+   CreateDateTime datetime,
+   PRIMARY KEY ( Id )
+);
+
+select * from T_ProductComments
+
+ insert into T_ProductComments (ProductId,Title,Msg,CreateDateTime) 
+ values ('10','faea','efe','2016-11-01');
