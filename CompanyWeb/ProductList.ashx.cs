@@ -12,6 +12,7 @@ namespace CompanyWeb
     /// </summary>
     public class ProductList : IHttpHandler
     {
+        private DataTable products;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -22,16 +23,14 @@ namespace CompanyWeb
                 pageNum = Convert.ToInt32(context.Request["PageNum"]);
             }
 
-            DataTable products;
-
             //如果指定了CategoryId参数，则只显示特定类型的产品
             //如果没有指定，则显示所有产品
             bool hasCategoryId = !string.IsNullOrEmpty(context.Request["CategoryId"]);
             if (hasCategoryId)
             {
                 long categoryId = Convert.ToInt64(context.Request["CategoryId"]);
-                products = MySqlHelper.ExecuteDataTable(@"select * from T_Product order by Id limit 
-                @Start, @End where CategoriyId=@CategoriyId", new MySqlParameter("@CategoryId", categoryId),
+                products = MySqlHelper.ExecuteDataTable(@"select * from T_Product where CategoriyId=@CategoriyId limit 
+                @Start, @End ", new MySqlParameter("@CategoriyId", categoryId),
                     new MySqlParameter("@Start", (pageNum - 1) * 9 + 1)
                 , new MySqlParameter("@End", pageNum * 9));
             }
@@ -46,7 +45,7 @@ namespace CompanyWeb
             if (hasCategoryId)
             {
                 int categoryId = Convert.ToInt32(context.Request["CategoryId"]);
-                totalCount = (long)MySqlHelper.ExecuteScalar("select count(*) from T_Product where CategoryId=@CategoryId", new MySqlParameter("@CategoryId", categoryId));
+                totalCount = (long)MySqlHelper.ExecuteScalar("select count(*) from T_Product where CategoriyId=@CategoryId", new MySqlParameter("@CategoryId", categoryId));
             }
             else
             {
@@ -58,7 +57,16 @@ namespace CompanyWeb
             {
                 pageData[i] = new { Href = "ProductList.ashx?PageNum=" + (i + 1), Title = i + 1 };
             }
-            var data = new { Products = products.Rows, PageData = pageData, TotalCount = totalCount, PageNum = pageNum, PageCount = pageCount };
+            var data = new
+            {
+                Products = products.Rows,
+                PageData = pageData,
+                TotalCount = totalCount,
+                PageNum = pageNum,
+                PageCount = pageCount,
+                ProductCategories = MySqlHelper.ExecuteDataTable(@" select * from 
+                    T_ProductCategories ").Rows
+            };
             string html = CommonHelper.RenderHtml("Front/ProductList.html", data);
             context.Response.Write(html);
         }

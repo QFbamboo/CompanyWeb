@@ -104,6 +104,7 @@
     <Content Include="Modles\Admin\Head.html" />
     <Content Include="Modles\Admin\ProductEdit.html" />
     <Content Include="Modles\Admin\ProductList.html" />
+    <Content Include="Modles\Admin\Settings.html" />
     <Content Include="Modles\Front\ProductList.html" />
     <Content Include="Modles\Front\ProductView.html" />
     <Content Include="MySql.Data.dll" />
@@ -365,6 +366,9 @@
     <Compile Include="Admin\ProductList.ashx.cs">
       <DependentUpon>ProductList.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Settings.ashx.cs">
+      <DependentUpon>Settings.ashx</DependentUpon>
+    </Compile>
     <Compile Include="CommonHelper.cs" />
     <Compile Include="index.ashx.cs">
       <DependentUpon>index.ashx</DependentUpon>
@@ -390,6 +394,7 @@
     <Content Include="Admin\ProductEdit.ashx" />
     <Content Include="scripts\ckeditor\.htaccess" />
     <Content Include="ProductCommentAjax.ashx" />
+    <Content Include="Admin\Settings.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

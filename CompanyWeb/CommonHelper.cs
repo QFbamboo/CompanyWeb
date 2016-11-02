@@ -1,8 +1,10 @@
-﻿using NVelocity;
+﻿using MySql.Data.MySqlClient;
+using NVelocity;
 using NVelocity.App;
 using NVelocity.Runtime;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -46,6 +48,23 @@ namespace CompanyWeb
             else {
                 return file.ContentLength > 0;
             }
+        }
+
+        public static DataRowCollection GetProductCategories() {
+            return MySqlHelper.ExecuteDataTable(@" select * from 
+                    T_ProductCategories ").Rows;
+        }
+
+        public static string ReadSetting(string name) {
+           DataTable dt= MySqlHelper.ExecuteDataTable("select value from T_Settings where Name=@Name",
+                new MySqlParameter("@Name", name));
+            if(dt.Rows.Count<=0){
+                throw new Exception("找不到Name="+name+"的配置项");
+            }else if(dt.Rows.Count>1){
+                throw new Exception("找到多条数据");
+            }
+            return (string)dt.Rows[0]["Value"];
+
         }
 
     }

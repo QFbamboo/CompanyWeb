@@ -69,7 +69,6 @@ namespace CompanyWeb
                 }
                 string json = new JavaScriptSerializer().Serialize(comments);
                 context.Response.Write(json);
-
             }
             else
             {

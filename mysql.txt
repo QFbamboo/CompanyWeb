@@ -24,7 +24,6 @@ insert into T_Product(Name,CategoriyId,ImagePath,Msg) values('','2','/uploadfile
 delete from T_Product where Id=4
 
 select * from T_Product order by Id limit 3,2   //查询第三行之后的两行，即第四行与第五行
-
 select p.Id as Id,p.Name as Name,c.Name as CategoryName from T_Product p 
 left join T_ProductCategories c on p.CategoriyId=c.Id order by Id limit 0,6
 
@@ -38,6 +37,15 @@ create table T_ProductComments(
 );
 
 select * from T_ProductComments
-
+select * from T_Product Id where CategoriyId=2 limit  1,6 
  insert into T_ProductComments (ProductId,Title,Msg,CreateDateTime) 
  values ('10','faea','efe','2016-11-01');
+
+create table T_Settings(
+   Id INT NOT NULL AUTO_INCREMENT,
+   Name varchar(250) NOT NULL,
+   Value varchar(250) NOT NULL, 
+   PRIMARY KEY ( Id )
+);
+
+
