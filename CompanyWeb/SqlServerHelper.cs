@@ -11,9 +11,8 @@ namespace CompanyWeb
     public static class SqlServerHelper
     {
 //        private static String connstr = @"Data Source=192.168.1.251;Initial Catalog=wzmon;
-//                                                Persist Security Info=True;User ID=jb;Password=jb";
-        private static String connstr = @"Data Source=115.236.36.51,1505;Initial Catalog=wzmon;
-                                                Persist Security Info=True;User ID=jb;Password=jb";
+//                                                Persist Security Info=True;User ID=******;Password=********";
+        private static String connstr = @"";
 
         public static SqlConnection OpenConnection()
         {
