@@ -14,7 +14,7 @@ namespace CompanyWeb
         //public static readonly string connstr =
         //    ConfigurationManager.ConnectionStrings["connstr"].ConnectionString;
 
-        static string connstr = "server=qdm114586148.my3w.com;port=3306;uid=qdm114586148;pwd=jiangroot;database=qdm114586148_db;";
+        static string connstr = "";
 
         public static MySqlConnection OpenConnection()
         {
